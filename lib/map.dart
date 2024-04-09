@@ -118,7 +118,7 @@ class TrashMap extends StatelessWidget {
                               InfoWindow(title: 'มหาวิทยาลัยมหิดลคณะพยาบาล'),
                         ),
                       },
-                      mapType: MapType.normal, // ประเภทของแผนที่
+                      mapType: MapType.normal, // ประเภทของแผนที
                     ),
                   ),
                 ),
