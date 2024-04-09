@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void main() {
   runApp(const FigmaToCodeApp());
@@ -25,7 +26,7 @@ class FigmaToCodeApp extends StatelessWidget {
 }
 
 class TrashMap extends StatelessWidget {
-  const TrashMap({super.key});
+  const TrashMap({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -118,14 +119,19 @@ class TrashMap extends StatelessWidget {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height - 175,
-                  child: InteractiveViewer(
-                    boundaryMargin: const EdgeInsets.all(20),
-                    minScale: 0.1,
-                    maxScale: 2.0,
-                    child: Image.asset(
-                      "assets/map.png",
-                      fit: BoxFit.fill,
+                  child: GoogleMap(
+                    initialCameraPosition: const CameraPosition(
+                      target: LatLng(37.42796133580664, -122.085749655962),
+                      zoom: 14.0,
                     ),
+                    mapType: MapType.normal,
+                    markers: {
+                      Marker(
+                        markerId: MarkerId('marker_1'),
+                        position: LatLng(37.42796133580664, -122.085749655962),
+                      ),
+                    },
+                    myLocationEnabled: true,
                   ),
                 ),
               ),
