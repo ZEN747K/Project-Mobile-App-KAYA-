@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pro/main.dart';
-
+import 'map.dart';
 void main() {
   runApp(const FigmaToCodeApp());
 }
@@ -16,12 +16,12 @@ class FigmaToCodeApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color.fromARGB(255, 18, 32, 47),
       ),
       routes: {
-        '/': (context) => TrashInformation(),
+        '/pop': (context) => TrashInformation(),
         // '/common': (context) => Frame2(),
         // '/insea': (context) => const AboutKaya(),
         // '/recycle':(context) => TrashInformation(),
         // '/danger':(context) => TrashInformation(),
-        '/menu': (context) => const CustomWidget(),
+       '/' : (context) => const CustomWidget(),
       },
       initialRoute: '/',
     );
@@ -62,9 +62,10 @@ class TrashInformation extends StatelessWidget {
                   width: 289,
                   height: 89,
                   child: Text(
-                    'trash Information',
+                    'Trash Information',
                     textAlign: TextAlign.center,
                     style: TextStyle(
+                      decoration: TextDecoration.none,
                       color: Colors.white,
                       fontSize: 32,
                       fontFamily: 'Inter',
@@ -77,10 +78,6 @@ class TrashInformation extends StatelessWidget {
               Positioned (
                 left: 45,
                 top: 158,
-                child: GestureDetector(
-                 onTap: () {              
-                      Navigator.pushNamed(context, '/common');                    
-                  },
                 child: Container(
                   width: 310,
                   height: 64,
@@ -111,6 +108,7 @@ class TrashInformation extends StatelessWidget {
                             'ขยะทั่วไป',
                             textAlign: TextAlign.center,
                             style: TextStyle(
+                              decoration: TextDecoration.none,
                               color: Colors.white,
                               fontSize: 24,
                               fontFamily: 'Inter',
@@ -124,7 +122,7 @@ class TrashInformation extends StatelessWidget {
                   ),
                  ),
                 ),
-              ),
+              
               
               Positioned(
                 left: 45,
@@ -158,6 +156,7 @@ class TrashInformation extends StatelessWidget {
                             'ขยะอินทรีย์',
                             textAlign: TextAlign.center,
                             style: TextStyle(
+                              decoration: TextDecoration.none,
                               color: Colors.white,
                               fontSize: 24,
                               fontFamily: 'Inter',
@@ -204,6 +203,7 @@ class TrashInformation extends StatelessWidget {
                             'ขยะอันตราย',
                             textAlign: TextAlign.center,
                             style: TextStyle(
+                              decoration: TextDecoration.none,
                               color: Colors.white,
                               fontSize: 24,
                               fontFamily: 'Inter',
@@ -222,7 +222,7 @@ class TrashInformation extends StatelessWidget {
                 top: 629,
                 child: GestureDetector(
                     onTap: () {
-                    Navigator.pushNamed(context, '/menu');
+                    Navigator.pushNamed(context, '/');
                 },
                 child: Container(
                   width: 310,
@@ -254,6 +254,7 @@ class TrashInformation extends StatelessWidget {
                             'MENU',
                             textAlign: TextAlign.center,
                             style: TextStyle(
+                              decoration: TextDecoration.none,
                               color: Colors.white,
                               fontSize: 24,
                               fontFamily: 'Inter',
@@ -309,6 +310,7 @@ class TrashInformation extends StatelessWidget {
                                     'ขยะรีไซเคิล',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
+                                      decoration: TextDecoration.none,
                                       color: Colors.white,
                                       fontSize: 24,
                                       fontFamily: 'Inter',

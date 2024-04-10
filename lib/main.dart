@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'map.dart';
 import 'about.dart';
+import 'trash_info.dart';
 
 void main() {
   runApp(const FigmaToCodeApp());
@@ -19,6 +20,7 @@ class FigmaToCodeApp extends StatelessWidget {
         '/': (context) => const CustomWidget(),
         '/map': (context) => const TrashMap(),
         '/about': (context) => const AboutKaya(),
+        '/TrashInformation': (context) => TrashInformation(),
       },
       initialRoute: '/',
     );
@@ -116,26 +118,31 @@ class CustomWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Positioned(
+                 Positioned(
                     left: 20,
-                    top: 330,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width - 40,
-                      height: 60,
-                      decoration: ShapeDecoration(
-                        color: const Color(0xFFD9D9D9),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                    top: 320,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/TrashInformation');
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width - 40,
+                        height: 60,
+                        decoration: ShapeDecoration(
+                          color: const Color(0xFFD9D9D9),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Trash information',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 24,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w900,
+                        child: const Center(
+                          child: Text(
+                            'TrashInformation',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 24,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w900,
+                            ),
                           ),
                         ),
                       ),
