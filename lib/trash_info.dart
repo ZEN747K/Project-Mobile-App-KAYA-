@@ -62,7 +62,7 @@ class TrashInformation extends StatelessWidget {
                   width: 289,
                   height: 89,
                   child: Text(
-                    'Trash Information',
+                    'trash Information',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
