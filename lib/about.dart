@@ -76,7 +76,7 @@ class AboutKaya extends StatelessWidget {
                         left: 18,
                         top: 4,
                         child: Text(
-                          'MEMU',
+                          'MENU',
                           style: TextStyle(
                             decoration: TextDecoration.none,
                             color: Colors.white,

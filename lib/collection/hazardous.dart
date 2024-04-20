@@ -1,0 +1,109 @@
+import 'package:flutter/material.dart';
+
+class HazardousScreen extends StatefulWidget {
+  const HazardousScreen({Key? key}) : super(key: key);
+
+  @override
+  _HazardousScreenState createState() => _HazardousScreenState();
+}
+
+class _HazardousScreenState extends State<HazardousScreen> {
+  final List<String> wasteOptions = ['กระป๋องสี', 'แบตเตอรี่', 'ผ้าอนามัย'];
+  final Map<String, int> wasteCounts = {};
+
+  @override
+  void initState() {
+    super.initState();
+    wasteOptions.forEach((option) {
+      wasteCounts[option] = 0;
+    });
+  }
+
+  void incrementWasteCount(String wasteType) {
+    setState(() {
+      wasteCounts[wasteType] = wasteCounts[wasteType]! + 1;
+    });
+  }
+
+  void showScores() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Waste Count"),
+        content: Text(wasteCounts.entries.map((e) => "${e.key}: ${e.value}").join("\n")),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red[800],
+        title: const Text('ขยะอันตราย'),
+        centerTitle: true,
+      ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.redAccent, Colors.deepOrange],
+              ),
+            ),
+            child: Center(
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  ...wasteOptions.map((option) => buildButton(option, Colors.grey, constraints.maxWidth)),
+                  const SizedBox(height: 20),
+                  buildScoreButton(Colors.red[600]!, constraints.maxWidth),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget buildButton(String option, Color backgroundColor, double maxWidth) {
+    return Container(
+      width: maxWidth * 0.8,
+      margin: const EdgeInsets.all(8),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: backgroundColor,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 20),
+        ),
+        onPressed: () => incrementWasteCount(option),
+        child: Text(option),
+      ),
+    );
+  }
+
+  Widget buildScoreButton(Color themeColor, double maxWidth) {
+    return Container(
+      width: maxWidth * 0.8,
+      margin: const EdgeInsets.all(8),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: themeColor,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 20),
+        ),
+        onPressed: showScores,
+        child: const Text('Show Score'),
+      ),
+    );
+  }
+}

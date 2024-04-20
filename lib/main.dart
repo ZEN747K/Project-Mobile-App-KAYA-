@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:pro/Trash_info.dart';
+import 'Energy.dart';
 import 'map.dart';
 import 'about.dart';
-import 'trash_info.dart';
+import 'trashcollection.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Future.delayed(const Duration(seconds: 1));
+  FlutterNativeSplash.remove();
   runApp(const FigmaToCodeApp());
 }
 
@@ -20,15 +26,30 @@ class FigmaToCodeApp extends StatelessWidget {
         '/': (context) => const CustomWidget(),
         '/map': (context) => const TrashMap(),
         '/about': (context) => const AboutKaya(),
-        '/TrashInformation': (context) => TrashInformation(),
+        '/TrashCollection': (context) => const TrashCollectionScreen(),
+        '/Energy': (context) => const EnergyComparation(),
+        '/information': (context) => const TrashInformation(),
       },
       initialRoute: '/',
     );
   }
 }
 
-class CustomWidget extends StatelessWidget {
+class CustomWidget extends StatefulWidget {
   const CustomWidget({super.key});
+
+  @override
+  State<CustomWidget> createState() => _CustomWidgetState();
+}
+
+class _CustomWidgetState extends State<CustomWidget> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 2), () {
+      FlutterNativeSplash.remove();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +68,7 @@ class CustomWidget extends StatelessWidget {
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: 100,
-                      decoration:
-                          const BoxDecoration(color: Color(0xFF5DA57A)),
+                      decoration: const BoxDecoration(color: Color(0xFF5DA57A)),
                       child: const Center(
                         child: Text(
                           'MENU',
@@ -96,34 +116,9 @@ class CustomWidget extends StatelessWidget {
                   Positioned(
                     left: 20,
                     top: 240,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width - 40,
-                      height: 60,
-                      decoration: ShapeDecoration(
-                        color: const Color(0xFFD9D9D9),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Trash collection',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 24,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                 Positioned(
-                    left: 20,
-                    top: 320,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, '/TrashInformation');
+                        Navigator.pushNamed(context, '/TrashCollection');
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width - 40,
@@ -136,7 +131,37 @@ class CustomWidget extends StatelessWidget {
                         ),
                         child: const Center(
                           child: Text(
-                            'TrashInformation',
+                            'TrashCollection',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 24,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 20,
+                    top: 330,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/information');
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width - 40,
+                        height: 60,
+                        decoration: ShapeDecoration(
+                          color: const Color(0xFFD9D9D9),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Trash information',
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 24,
@@ -151,23 +176,28 @@ class CustomWidget extends StatelessWidget {
                   Positioned(
                     left: 20,
                     top: 420,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width - 40,
-                      height: 60,
-                      decoration: ShapeDecoration(
-                        color: const Color(0xFFD9D9D9),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/Energy');
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width - 40,
+                        height: 60,
+                        decoration: ShapeDecoration(
+                          color: const Color(0xFFD9D9D9),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Energy comparison',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 24,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w900,
+                        child: const Center(
+                          child: Text(
+                            'Energy comparation',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 24,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w900,
+                            ),
                           ),
                         ),
                       ),
