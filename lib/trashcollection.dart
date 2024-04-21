@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'collection/general.dart';
 import 'collection/hazardous.dart';
 import 'collection/natural.dart';
+import 'collection/point.dart';
 import 'collection/recycle.dart';
 
 class TrashCollectionScreen extends StatelessWidget {
@@ -69,6 +70,17 @@ class TrashCollectionScreen extends StatelessWidget {
                      Navigator.push(
                        context,
                        MaterialPageRoute(builder: (context) => const HazardousScreen()),
+                     );
+                   },
+                   maxWidth: constraints.maxWidth,
+                 ),
+                 TrashButton(
+                   label: 'Point Screen',
+                   color: Color.fromARGB(255, 95, 95, 95),
+                   onPressed: () {
+                     Navigator.push(
+                       context,
+                       MaterialPageRoute(builder: (context) => const PointScreen()),
                      );
                    },
                    maxWidth: constraints.maxWidth,

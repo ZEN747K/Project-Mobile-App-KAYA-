@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HazardousScreen extends StatefulWidget {
   const HazardousScreen({Key? key}) : super(key: key);
@@ -14,23 +15,42 @@ class _HazardousScreenState extends State<HazardousScreen> {
   @override
   void initState() {
     super.initState();
-    wasteOptions.forEach((option) {
-      wasteCounts[option] = 0;
-    });
+    _initializeWasteCounts();
   }
 
-  void incrementWasteCount(String wasteType) {
+  Future<void> _initializeWasteCounts() async {
+    final prefs = await SharedPreferences.getInstance();
+    for (final option in wasteOptions) {
+      wasteCounts[option] = prefs.getInt(option) ?? 0;
+    }
+  }
+
+  Future<void> _incrementWasteCount(String wasteType) async {
     setState(() {
       wasteCounts[wasteType] = wasteCounts[wasteType]! + 1;
     });
+
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(wasteType, wasteCounts[wasteType]!);
   }
 
-  void showScores() {
+  Future<void> _clearWasteCounts() async {
+    final prefs = await SharedPreferences.getInstance();
+    for (final option in wasteOptions) {
+      await prefs.remove(option);
+    }
+    setState(() {
+      _initializeWasteCounts();
+    });
+  }
+
+  void _showScores() {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text("Waste Count"),
-        content: Text(wasteCounts.entries.map((e) => "${e.key}: ${e.value}").join("\n")),
+        content: Text(
+            wasteCounts.entries.map((e) => "${e.key}: ${e.value}").join("\n")),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
@@ -63,7 +83,8 @@ class _HazardousScreenState extends State<HazardousScreen> {
               child: ListView(
                 shrinkWrap: true,
                 children: [
-                  ...wasteOptions.map((option) => buildButton(option, Colors.grey, constraints.maxWidth)),
+                  ...wasteOptions.map(
+                      (option) => buildButton(option, Colors.grey, constraints.maxWidth)),
                   const SizedBox(height: 20),
                   buildScoreButton(Colors.red[600]!, constraints.maxWidth),
                 ],
@@ -85,7 +106,7 @@ class _HazardousScreenState extends State<HazardousScreen> {
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(vertical: 20),
         ),
-        onPressed: () => incrementWasteCount(option),
+        onPressed: () => _incrementWasteCount(option),
         child: Text(option),
       ),
     );
@@ -101,7 +122,7 @@ class _HazardousScreenState extends State<HazardousScreen> {
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(vertical: 20),
         ),
-        onPressed: showScores,
+        onPressed: _showScores,
         child: const Text('Show Score'),
       ),
     );

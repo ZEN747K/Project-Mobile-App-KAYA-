@@ -330,7 +330,7 @@ class Group74 extends StatelessWidget {
                         ),
                       ),
                       const Positioned(
-                        left: 51,
+                        left: 57,
                         top: 21,
                         child: SizedBox(
                           width: 289,
