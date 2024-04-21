@@ -12,8 +12,13 @@ class TrashCollectionScreen extends StatelessWidget {
  Widget build(BuildContext context) {
    return Scaffold(
      appBar: AppBar(
-       backgroundColor: Colors.green,
-       title: const Text('Trash collection'),
+       backgroundColor: const Color.fromARGB(255, 93, 166, 122),
+       title: const Text('Trash collection',style: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              fontSize: 30,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w900,
+                            ),),
        centerTitle: true,
      ),
      body: Container(
@@ -21,7 +26,7 @@ class TrashCollectionScreen extends StatelessWidget {
          gradient: LinearGradient(
            begin: Alignment.topCenter,
            end: Alignment.bottomCenter,
-           colors: [Color(0xFF5E9D48), Color(0xFF327755)],
+           colors: [Color.fromARGB(255, 32, 74, 53), Color.fromARGB(255, 27, 63, 45)],
          ),
        ),
        child: Center(

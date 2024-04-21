@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'point.dart';
+
 
 class GeneralScreen extends StatefulWidget {
   const GeneralScreen({Key? key}) : super(key: key);
